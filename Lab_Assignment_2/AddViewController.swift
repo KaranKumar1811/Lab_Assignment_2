@@ -54,16 +54,14 @@ class AddViewController: UIViewController {
                            textField.resignFirstResponder()
                        }
             
-            print(title1)
-            print(days1)
-            print("\(tasks)*******")
+            
                    }
         
         
         override func viewWillDisappear(_ animated: Bool) {
                 //delegate?.tableView.reloadData()
             delegate?.updateArray(taskArray: tasks!)
-            print("\(tasks)~~~~~~~~~~~~~~~~~~@!")
+            
         //        print(tasks!.count)
             }
             
@@ -131,7 +129,7 @@ class AddViewController: UIViewController {
             } catch{
                 print(error)
             }
-            print("\(tasks!.count )@@@@@@@@@@@@@")
+            
           
         }
 

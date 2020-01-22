@@ -13,23 +13,25 @@ import CoreData
 
 class TaskListTableVC: UITableViewController, UISearchBarDelegate {
 
-    
+    var searchArray : [Task]?
      var filteredData: [Task]?
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchbar: UISearchBar!
     
     @IBOutlet var tableview: UITableView!
     
     @IBOutlet weak var completed: UIButton!
-    
+    var isSearch = false
     var isImportant = false
     var tasks : [Task]?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        searchBar.delegate = self
        LoadCoreData()
+    
 //          filteredData = tasks
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -47,24 +49,59 @@ class TaskListTableVC: UITableViewController, UISearchBarDelegate {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        if isSearch
+        {
+          return searchArray?.count ?? 0
+        }
+        else
+        {
         return tasks?.count ?? 0
+        }
     }
 
   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
-        let task = tasks![indexPath.row]
-     let cell = tableView.dequeueReusableCell(withIdentifier:"TaskCell")
-        cell?.textLabel?.text = task.title
-        cell?.detailTextLabel?.text = "\(task.days) days "
-        // Configure the cell...
-
         
-//
-//        cell.settask(at: indexPath,task: [(tasks?[indexPath.row])!])
-       
-        return cell!
-    }
+    let cell = tableView.dequeueReusableCell(withIdentifier:"TaskCell")
+          
+         if isSearch{
+         let task = searchArray![indexPath.row]
+         cell?.textLabel?.text = task.title
+         cell?.detailTextLabel?.text = "\(task.days) days "
+         if task.days == 0 {
+           cell?.contentView.backgroundColor = .green
+           cell?.detailTextLabel?.text = "Completed"
+            
+         }
+         else {
+           cell?.contentView.backgroundColor = .white
+         }
+           cell?.textLabel?.textColor = .black
+         // Configure the cell...
+     //
+     //    cell.settask(at: indexPath,task: [(tasks?[indexPath.row])!])
+         }
+         else
+         {
+           let task = tasks![indexPath.row]
+           cell?.textLabel?.text = task.title
+           cell?.detailTextLabel?.text = "\(task.days) days "
+           if task.days == 0 {
+             cell?.contentView.backgroundColor = .green
+             cell?.detailTextLabel?.text = "Completed"
+              
+           }
+           else {
+             cell?.contentView.backgroundColor = .white
+           }
+             cell?.textLabel?.textColor = .black
+           // Configure the cell...
+            
+         }
+         return cell!
+       }
+
     
     
    
@@ -200,11 +237,32 @@ class TaskListTableVC: UITableViewController, UISearchBarDelegate {
            } catch{
                print(error)
            }
-           print("\(tasks!.count )@@@@@@@@@@@@@")
+           
          
        }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
+    {
+    let filtered = tasks!.filter { $0.title.lowercased().contains(searchText.lowercased() )}
+          
+      if filtered.count>0
+      {
+      //tasks = []
+        searchArray = filtered;
+        isSearch = true;
+      }
+      else
+      {
+      searchArray = self.tasks
+        isSearch = false;
+      }
+      self.tableView.reloadData();
+    }
     
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool
+    {
+      return true;
+    }
     
     
     func addDay(){
@@ -240,18 +298,16 @@ class TaskListTableVC: UITableViewController, UISearchBarDelegate {
     
     
     
-     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-           
-        filteredData = searchText.isEmpty ? tasks! : tasks!.filter { (item: Task) -> Bool in
-                // If dataItem matches the searchText, return true to include it
-    //            return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
-            let task = item.title
-                return task.lowercased().contains(searchText.lowercased())
-            }
-            
-            tableView.reloadData()
-        }
+   
         
+    
+    
+    
+    @IBAction func sortTask(_ sender: UIBarButtonItem) {
+        self.tasks?.sort(by: {$0.title.lowercased() < $1.title.lowercased()} )
+        
+        self.tableview.reloadData()
+    }
     
     
     

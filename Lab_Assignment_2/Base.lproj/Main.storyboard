@@ -53,7 +53,11 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="ng3-1r-8G7">
-                        <barButtonItem key="leftBarButtonItem" image="asce" id="hgA-Vl-DC6"/>
+                        <barButtonItem key="leftBarButtonItem" image="sortd" id="hgA-Vl-DC6">
+                            <connections>
+                                <action selector="sortTask:" destination="v4O-Kp-OFe" id="Xuw-wV-uMT"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="OE5-Oz-CRg">
                             <color key="tintColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -63,6 +67,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="searchBar" destination="dzz-09-cKS" id="VL0-JN-f6X"/>
                         <outlet property="searchbar" destination="dzz-09-cKS" id="irh-oj-FYv"/>
                         <outlet property="tableview" destination="8vI-Jc-vzD" id="DPr-VH-ovx"/>
                     </connections>
@@ -80,39 +85,52 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="KLa-l6-fWh">
-                                <rect key="frame" x="57" y="186" width="201.5" height="171"/>
+                                <rect key="frame" x="20" y="188" width="374" height="96"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVG-Gt-BmL">
-                                        <rect key="frame" x="0.0" y="0.0" width="201.5" height="22"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter title for your task" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r6Z-ly-Js5">
-                                        <rect key="frame" x="0.0" y="50" width="201.5" height="21.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Allow number of days:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXT-2y-doU">
-                                        <rect key="frame" x="0.0" y="99.5" width="201.5" height="22"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter number of days" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JC5-ZX-bUR">
-                                        <rect key="frame" x="0.0" y="149.5" width="201.5" height="21.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="xF7-GP-nbl">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVG-Gt-BmL">
+                                                <rect key="frame" x="0.0" y="0.0" width="45.5" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter title for your task" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r6Z-ly-Js5">
+                                                <rect key="frame" x="65.5" y="0.0" width="308.5" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="ZVG-Gt-BmL" firstAttribute="top" secondItem="xF7-GP-nbl" secondAttribute="top" id="BQN-g3-HdK"/>
+                                            <constraint firstItem="ZVG-Gt-BmL" firstAttribute="leading" secondItem="xF7-GP-nbl" secondAttribute="leading" id="HPV-wu-v9q"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Fki-cn-kQ1">
+                                        <rect key="frame" x="0.0" y="62" width="374" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of days:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXT-2y-doU">
+                                                <rect key="frame" x="0.0" y="0.0" width="150.5" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter number of days" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JC5-ZX-bUR">
+                                                <rect key="frame" x="170.5" y="0.0" width="203.5" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="75H-Tp-xNG" firstAttribute="bottom" secondItem="KLa-l6-fWh" secondAttribute="bottom" constant="456" id="7Mr-XU-nI0"/>
-                            <constraint firstItem="75H-Tp-xNG" firstAttribute="trailing" secondItem="KLa-l6-fWh" secondAttribute="trailing" constant="155.5" id="UUO-WW-dfM"/>
-                            <constraint firstItem="KLa-l6-fWh" firstAttribute="leading" secondItem="75H-Tp-xNG" secondAttribute="leading" constant="57" id="oED-lh-Nk5"/>
-                            <constraint firstItem="KLa-l6-fWh" firstAttribute="top" secondItem="75H-Tp-xNG" secondAttribute="top" constant="98" id="ypR-xc-qTM"/>
+                            <constraint firstItem="KLa-l6-fWh" firstAttribute="leading" secondItem="75H-Tp-xNG" secondAttribute="leading" constant="20" id="IIQ-ts-rIr"/>
+                            <constraint firstItem="KLa-l6-fWh" firstAttribute="top" secondItem="75H-Tp-xNG" secondAttribute="top" constant="100" id="dxF-Dr-NK0"/>
+                            <constraint firstAttribute="trailing" secondItem="KLa-l6-fWh" secondAttribute="trailing" constant="20" id="lPx-IB-JFg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="75H-Tp-xNG"/>
                     </view>
@@ -154,7 +172,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="asce" width="24" height="24"/>
         <image name="plus" catalog="system" width="64" height="56"/>
+        <image name="sortd" width="24" height="24"/>
     </resources>
 </document>
