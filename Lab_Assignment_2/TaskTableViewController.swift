@@ -32,23 +32,18 @@ class TaskListTableVC: UITableViewController, UISearchBarDelegate {
         searchBar.delegate = self
        LoadCoreData()
     
-//          filteredData = tasks
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        
         if isSearch
         {
           return searchArray?.count ?? 0
@@ -78,9 +73,7 @@ class TaskListTableVC: UITableViewController, UISearchBarDelegate {
            cell?.contentView.backgroundColor = .white
          }
            cell?.textLabel?.textColor = .black
-         // Configure the cell...
-     //
-     //    cell.settask(at: indexPath,task: [(tasks?[indexPath.row])!])
+       
          }
          else
          {
@@ -96,7 +89,7 @@ class TaskListTableVC: UITableViewController, UISearchBarDelegate {
              cell?.contentView.backgroundColor = .white
            }
              cell?.textLabel?.textColor = .black
-           // Configure the cell...
+           
             
          }
          return cell!
@@ -105,13 +98,9 @@ class TaskListTableVC: UITableViewController, UISearchBarDelegate {
     
     
    
-//    override func viewWillAppear(_ animated: Bool) {
-//        self.tableView.reloadData()
-//    }
-   
-    // Override to support conditional editing of the table view.
+
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
+       
         return true
     }
   
@@ -175,21 +164,7 @@ class TaskListTableVC: UITableViewController, UISearchBarDelegate {
 
 
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
+    
 
     // MARK: - Navigation
 
