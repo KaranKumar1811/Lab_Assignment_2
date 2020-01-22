@@ -17,7 +17,6 @@ class TaskListTableVC: UITableViewController, UISearchBarDelegate {
      var filteredData: [Task]?
     
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var searchbar: UISearchBar!
     
     @IBOutlet var tableview: UITableView!
     
