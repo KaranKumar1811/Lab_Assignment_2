@@ -18,26 +18,17 @@ class AddViewController: UIViewController {
         
         override func viewDidLoad() {
             super.viewDidLoad()
-    //        tasks = [Task]()
+   
             
             SaveCoreData()
 
-    //               NotificationCenter.default.addObserver(self, selector: #selector(saveCoreData),name: UIApplication.willResignActiveNotification,object: nil)
-                   // Do any additional setup after loading the view.
+   
             NotificationCenter.default.addObserver(self, selector: #selector(SaveCoreData), name: UIApplication.willResignActiveNotification, object: nil)
             
         }
         
 
-        /*
-        // MARK: - Navigation
-
-        // In a storyboard-based application, you will often want to do a little preparation before navigation
-        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            // Get the new view controller using segue.destination.
-            // Pass the selected object to the new view controller.
-        }
-        */
+      
 
         
         
@@ -59,28 +50,22 @@ class AddViewController: UIViewController {
         
         
         override func viewWillDisappear(_ animated: Bool) {
-                //delegate?.tableView.reloadData()
+                
             delegate?.updateArray(taskArray: tasks!)
             
-        //        print(tasks!.count)
+      
             }
             
-    //               override func prepare(for segue:UIStoryboardSegue, sender : Any?){
-    //                   if let TaskTable = segue.destination as? TaskListTableVC {
-    //                    TaskTable.tasks = self.tasks
-    ////                    print(TaskTable.tasks!)
-    //                   }
-    //                }
-
+              
         
         @objc func SaveCoreData(){
-            //call clear core data
+            
           
                 clearCoreData()
-            //create an instance of app delegate
+            
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
-            // context
+            
             let ManagedContext = appDelegate.persistentContainer.viewContext
 
             for task in tasks!{
@@ -89,15 +74,13 @@ class AddViewController: UIViewController {
                taskEntity.setValue(task.days, forKey: "days")
 
 
-                //save  context
+                
                 do{
                     try ManagedContext.save()
                 }catch{
                     print(error)
                 }
 
-
-                print("\(task.days)&&&&")
             }
              LoadCoreData()
         }
@@ -105,10 +88,10 @@ class AddViewController: UIViewController {
         func LoadCoreData(){
 
             tasks = [Task]()
-            //create an instance of app delegate
+            
                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
-                   // context
+                   
                    let ManagedContext = appDelegate.persistentContainer.viewContext
 
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskModel")
@@ -135,13 +118,13 @@ class AddViewController: UIViewController {
 
 
         func clearCoreData(){
-         //create an instance of app delegate
+         
          let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
-         // context
+        
          let ManagedContext = appDelegate.persistentContainer.viewContext
 
-            //create fetch request
+            
               let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskModel")
 
             fetchRequest.returnsObjectsAsFaults = false
@@ -165,71 +148,7 @@ class AddViewController: UIViewController {
         
         
         
-        //files
-        
-    //    func getFilepath() -> String{
-    //               let documantPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-    //               if documantPath.count > 0 {
-    //                   let documentDirectory = documantPath[0]
-    //                   let filepath = documentDirectory.appending("/taskdata.txt")
-    //                   return filepath
-    //               }
-    //               return ""
-    //
-    //           }
-    //
-    //           func loadData(){
-    //               let filepath = getFilepath()
-    //
-    //            tasks = [Task]()
-    //               if FileManager.default.fileExists(atPath : filepath){
-    //                   do{
-    //                       //extract data
-    //                       let fileContents = try String(contentsOfFile:filepath)
-    //                       let conentArray = fileContents.components(separatedBy:"\n")
-    //                       for content in conentArray{
-    //                           let  taskcontent = content.components(separatedBy:",")
-    //                           if taskcontent.count == 4 {
-    ////                               let book = Book(title:bookcontent[0],author: bookcontent[1],pages:Int(bookcontent[2])!,year:Int(bookcontent[3])!)
-    ////                               books?.append(book)
-    //
-    //
-    //                            let task = Task(title: taskcontent[0], days: Int(taskcontent[1])!)
-    //                            tasks?.append(task)
-    //                           }
-    //                       }
-    //                   }catch{
-    //                       print(error)
-    //                   }
-    //               }
-    //
-    //           }
-    //
-    //
-    //
-    //
-    //    @objc func saveData(){
-    //            let filepath = getFilepath()
-    //            var saveString = ""
-    //            for task in tasks!{
-    //                saveString = "\(saveString)\(task.title),\(task.days)"
-    //            }
-    //            //write to path
-    //
-    //            do{
-    //
-    //        try saveString.write(toFile:filepath, atomically : true , encoding : .utf8)
-    //            }
-    //            catch{
-    //                print(error)
-    //            }
-    //        }
-    //
-    //
-    //
-    //
-    //
-        
+   
         
         
         
