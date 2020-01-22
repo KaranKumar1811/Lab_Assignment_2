@@ -68,7 +68,6 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="searchBar" destination="dzz-09-cKS" id="VL0-JN-f6X"/>
-                        <outlet property="searchbar" destination="dzz-09-cKS" id="irh-oj-FYv"/>
                         <outlet property="tableview" destination="8vI-Jc-vzD" id="DPr-VH-ovx"/>
                     </connections>
                 </tableViewController>
