@@ -12,6 +12,7 @@ import Foundation
 class Task{
     var title : String
     var days : Int
+    
    
     
     init(title : String,days: Int){

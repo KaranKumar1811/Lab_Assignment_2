@@ -277,15 +277,7 @@ class TaskListTableVC: UITableViewController, UISearchBarDelegate {
                CancelAction.setValue(UIColor.brown, forKey: "titleTextColor")
                let AddItemAction = UIAlertAction(title: "Add Item", style: .default){
                    (action) in
-                
-                
-                
-                
-                
-                
-                
-                
-        
+         
     }
         AddItemAction.setValue(UIColor.black, forKey: "titleTextColor")
                              alertcontroller.addAction(CancelAction)
